@@ -1,0 +1,40 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const company_1 = __importDefault(require("./company"));
+const gAuth_1 = __importDefault(require("./google/gAuth"));
+const gCalendar_1 = __importDefault(require("./google/gCalendar"));
+const holiday_1 = __importDefault(require("./holiday"));
+const leave_1 = __importDefault(require("./leave"));
+const project_1 = __importDefault(require("./project"));
+const reports_1 = __importDefault(require("./reports"));
+const task_1 = __importDefault(require("./task"));
+const timelog_1 = __importDefault(require("./timelog"));
+const todo_1 = __importDefault(require("./todo"));
+const training_1 = __importDefault(require("./training"));
+const blog_1 = __importDefault(require("./blog"));
+const team_1 = __importDefault(require("./team"));
+const registerRoutes = (app) => {
+    const router = (0, express_1.Router)();
+    router.use(company_1.default);
+    router.use(gAuth_1.default);
+    router.use(gCalendar_1.default);
+    router.use(holiday_1.default);
+    router.use(leave_1.default);
+    router.use(project_1.default);
+    router.use(reports_1.default);
+    router.use(task_1.default);
+    router.use(timelog_1.default);
+    router.use(todo_1.default);
+    router.use(training_1.default);
+    router.use(blog_1.default);
+    router.use(team_1.default);
+    router.use("/*", (req, res) => {
+        res.status(404).send("Not found");
+    });
+    app.use("/api", router);
+};
+exports.default = registerRoutes;
